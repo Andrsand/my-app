@@ -30,7 +30,8 @@ const style = {
 
 class App extends React.Component {
   state = {
-    items: Array.from({ length: 20 }) // поле items с изначальной длинной 20 строк
+    items: Array.from(['fff', 'ssss', 2, 4, 4, 5, 4, 3, 3, 2, 3, 4, 6, 'fff', 'ssss', 2, 4, 4, 5, 4, 3, 3, 2, 3, 4, 6, 'fff', 'ssss', 2, 4, 4, 5, 4, 3, 3, 2, 3, 4, 6, 'fff', 'ssss', 2, 4, 4, 5, 4, 3, 3, 2, 3, 4, 6, 'end'])
+    //items: Array.from({ length: 20 }) // поле items с изначальной длинной 20 строк
   };
 
   fetchMoreData = () => {
@@ -38,14 +39,14 @@ class App extends React.Component {
     // 20 more records in 1.5 secs
     setTimeout(() => {
       this.setState({
-        items: this.state.items.concat(Array.from({ length: 5 })) // добавляет в массив определенное число новых строк
+        items: this.state.items.concat(Array.from({ length: 10 })) // добавляет в массив определенное число новых строк
       });
-    }, 1500);
+    }, 500);
   };
 
   render() {
     return (
-      <div>
+      <div id="scrollableDiv" style={{ height: 500, overflow: "auto" }}>
         <h1>demo: react-infinite-scroll-component</h1>
         <hr />
         <InfiniteScroll
@@ -53,10 +54,11 @@ class App extends React.Component {
           next={this.fetchMoreData}
           hasMore={true}
           loader={<h4>Loading...</h4>}
+          scrollableTarget="scrollableDiv"
         >
           {this.state.items.map((i, index) => (
             <div style={style} key={index}>
-              событие - #{index} !!!
+              {i} - #{index} !!!
               <details>
                 <summary></summary>
                 <p>Бендер Родригез</p>
